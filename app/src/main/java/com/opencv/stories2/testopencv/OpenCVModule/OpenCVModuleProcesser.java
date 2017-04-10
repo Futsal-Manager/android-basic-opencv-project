@@ -5,16 +5,75 @@ import com.opencv.stories2.testopencv.LogManager.LogManager;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.opencv.stories2.testopencv.DefineManager.EACH_BLUR_BLOCK_SIZE;
 
 /**
  * Created by stories2 on 2017. 4. 11..
  */
 
 public class OpenCVModuleProcesser {
+    Mat blurred, hsv, mask;
+    Scalar orangeLower, orangeUpper;
+    List<MatOfPoint> listOfContour;
+
+    public void InitOpenCVModule() {
+        blurred = new Mat();
+        hsv = new Mat();
+        mask = new Mat();
+
+        orangeLower = new Scalar(0, 150, 150);
+        orangeUpper = new Scalar(25, 255, 255);
+
+        listOfContour = new ArrayList<MatOfPoint>();
+    }
+
+    public Mat DetectCircleFromFrameImage(Mat frame) {
+        try {
+            Imgproc.GaussianBlur(frame, frame, new Size(EACH_BLUR_BLOCK_SIZE, EACH_BLUR_BLOCK_SIZE), 0);
+
+            /*Imgproc.cvtColor(frame, hsv, Imgproc.COLOR_BGR2HSV);
+
+            Core.inRange(hsv, orangeLower, orangeUpper, mask);
+            Imgproc.erode(mask, mask, Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(2,2)));
+            Imgproc.dilate(mask, mask, Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(2,2)));
+
+            Imgproc.findContours(mask, listOfContour, null, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+
+            if(!listOfContour.isEmpty()) {
+                listOfContour.clear();
+            }*/
+        }
+        catch (Exception err) {
+            LogManager.PrintLog("OpenCVModuleProcesser", "DetectCircleFromFrameImage", "Error: " + err.getMessage(), DefineManager.LOG_LEVEL_ERROR);
+        }
+        return frame;
+    }
+
+    public void ReleaseMats() {
+        try {
+            if(blurred != null) {
+                blurred.release();
+            }
+            if(hsv != null) {
+                hsv.release();
+            }
+            if(mask != null) {
+                mask.release();
+            }
+        }
+        catch (Exception err) {
+            LogManager.PrintLog("OpenCVModuleProcesser", "ReleaseMats", "Error: " + err.getMessage(), DefineManager.LOG_LEVEL_ERROR);
+        }
+    }
 
     public Mat DetectBallFromFrameImage(Mat cameraFrameImage) {
         try {

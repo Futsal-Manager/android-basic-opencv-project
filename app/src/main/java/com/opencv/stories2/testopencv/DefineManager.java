@@ -20,6 +20,12 @@ public class DefineManager {
             Android API Version
             Requested Permission Order Number
              */
-            ANDROID_VERSION_OF_MARSHMALLOW = 23, PERMISSION_REQUESTED_ORDER = 1
+            ANDROID_VERSION_OF_MARSHMALLOW = 23, PERMISSION_REQUESTED_ORDER = 1,
+
+            /*
+            OpenCVModuleProcesser
+            Blur Process Parameter
+             */
+            EACH_BLUR_BLOCK_SIZE = 11
             ;
 }

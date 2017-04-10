@@ -17,18 +17,19 @@ public class MainActivityProcesser implements CameraBridgeViewBase.CvCameraViewL
 
     @Override
     public void onCameraViewStarted(int width, int height) {
-
+        openCVModuleProcesser.InitOpenCVModule();
     }
 
     @Override
     public void onCameraViewStopped() {
-
+        openCVModuleProcesser.ReleaseMats();
     }
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat eachCameraFrameImage;
-        eachCameraFrameImage = openCVModuleProcesser.DetectBallFromFrameImage(inputFrame.rgba());
+        //eachCameraFrameImage = openCVModuleProcesser.DetectBallFromFrameImage(inputFrame.rgba());
+        eachCameraFrameImage = openCVModuleProcesser.DetectCircleFromFrameImage(inputFrame.rgba());
         return eachCameraFrameImage;
     }
 }
