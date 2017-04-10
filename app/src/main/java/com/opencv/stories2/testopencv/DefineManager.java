@@ -26,6 +26,6 @@ public class DefineManager {
             OpenCVModuleProcesser
             Blur Process Parameter
              */
-            EACH_BLUR_BLOCK_SIZE = 11
+            EACH_BLUR_BLOCK_SIZE = 11, NOT_AVAILABLE = -1, MINIMUM_CIRCLE_RADIUS = 10
             ;
 }
